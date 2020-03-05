@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: favorite-beer
+  labels:
+    app: favorite-beer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: favorite-beer
+  template:
+    metadata:
+      labels:
+        app: favorite-beer
+    spec:
+      containers:
+      - name: favorite-beer
+        image: myRegistryAKSDays.azurecr.io/favorite-beer:v1
+        env:
+        - name: REDIS_HOST
+          value: "favorite-beer-redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: SERVICE_SETTINGS_PATH
+          value: "/etc/config/servicesettings.json"
+        ports:
+        - name: http
+          containerPort: 80
+        volumeMounts:
+        - name: favorite-beer-config-volume
+          mountPath: /etc/config
+      volumes:
+        - name: favorite-beer-config-volume
+          configMap:
+            name: favorite-beer

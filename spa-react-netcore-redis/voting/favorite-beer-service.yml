@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: favorite-beer
+spec:
+  selector:
+    app: favorite-beer
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 31650
+  type: LoadBalancer

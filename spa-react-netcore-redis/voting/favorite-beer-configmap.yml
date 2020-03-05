@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: favorite-beer
+data:
+  servicesettings.json: |
+    {
+      "ServiceSettings": {
+        "Beers": ["Red Hook", "Pyramid", "Great Divide", "New Belgium", "KoolAid", "Ocean Spray"]
+      }
+    }
